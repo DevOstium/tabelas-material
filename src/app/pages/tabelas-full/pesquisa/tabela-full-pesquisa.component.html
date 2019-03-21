@@ -1,0 +1,49 @@
+<h1>Pesquisa Categorias</h1>
+
+
+<form class="example-form" [formGroup]='categoriaForm'>
+     
+    <mat-form-field class="example-full-width">
+          <input matInput 
+                 placeholder="Busca por Categoria" 
+                 [matAutocomplete]="auto" 
+                 formControlName='userInput'
+                 (keyup)="pesquisa.next($event.target.value)"
+                 >
+    </mat-form-field>
+
+    <span>Pesquisa: {{categoriaForm.get('userInput').value | json}}</span>
+  
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+
+          <mat-option *ngIf="isLoading" class="is-loading"><mat-spinner diameter="50"></mat-spinner></mat-option>
+
+          <ng-container *ngIf="!isLoading">
+              <mat-option *ngFor="let categoria of categorias" [value]="categoria">
+                      <span (click)="loadTable(categoria.nome)" >{{ categoria.nome }}</span>
+                      <small  > | ID: {{categoria.id}}</small>
+              </mat-option>
+          </ng-container>
+
+    </mat-autocomplete>
+
+    <div class="card">
+        <div class="card-body">
+            <table class="lessons-table mat-elevation-z7 table-stats table table-striped table-bordered" *ngIf="(table$ | async) as items">
+
+                <thead>
+                    <th>#</th>
+                    <th>Nome</th>
+                </thead>
+
+                <tr *ngFor="let i of items">
+                    <td class="seqno-cell">{{i.id}}</td>
+                    <td class="description-cell">{{i.nome}}</td>
+                </tr>
+
+            </table>
+
+        </div>
+    </div>
+
+</form>
