@@ -1,28 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { debounceTime, tap,  finalize, switchMap } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 import { CategoriaService } from '../services/categoria.service';
 import { Categoria } from '../domain/categoria.model';
+import { ProdutoService } from '../services/produto.service';
+import { Produto } from '../../tabela-checkbox/domain/tabela-checkbox.model';
 
 @Component({
      selector   : 'input-pesquisa-categoria',
     templateUrl : 'tabela-full-pesquisa.component.html',
     styleUrls   : ['tabel-full-pesquisa.component.css'] 
 })
-export class TabelaFullPesquisaComponent implements OnInit{
+export class TabelaFullPesquisaComponent implements OnInit, OnDestroy {
 
     categorias    : Categoria[] = [];
     categoriaForm : FormGroup;
     isLoading     = false;
 
-    table$ : Observable<Categoria[]>;    
+    produtos : Produto[] = [];    
 
     pesquisa : Subject<string> = new Subject<string>();
+    
+    minDate = new Date(2019, 3, 20);
+    maxDate = new Date(2019, 3, 24);
 
     constructor(
-                private formBuilder       : FormBuilder,
-                private categoriaService  : CategoriaService
+                private  formBuilder       : FormBuilder,
+                private  categoriaService  : CategoriaService,
+                private  produtoService    : ProdutoService
                 ){}
 
     ngOnInit(): void {
@@ -31,7 +37,7 @@ export class TabelaFullPesquisaComponent implements OnInit{
             .pipe(
                     debounceTime(400),
                     tap( () => this.isLoading = true ),
-                    tap( search => (search) ? search : this.loadTable( )),
+                    //tap( search => (search) ? search : this.loadTable( )),
                     switchMap( search =>  {
                                         console.log("search send to server: " , search)       
                                         return   this.categoriaService.findAll(search)
@@ -43,12 +49,7 @@ export class TabelaFullPesquisaComponent implements OnInit{
                                                 this.categorias = response;
                                             }                
                             ); 
-                        
-
-
-
         this.categoriaForm = this.formBuilder.group({ userInput: null  });  
-  
     }
 
     displayFn( categoria : Categoria ){
@@ -57,10 +58,18 @@ export class TabelaFullPesquisaComponent implements OnInit{
         }
     }                          
 
-    loadTable( usuario = '' ){
-        console.log("loadTable : " , usuario)
-       //this.table$  =  this.service.resultTable(usuario);
+    ngOnDestroy(): void {
+        console.log("Chamou o unsubscribe() : " )
+        this.pesquisa.unsubscribe();
     }
 
+    loadTable( categorias = '' ){
+        console.log("categorias : " , categorias)
+        this.produtoService.findAll().subscribe( response => this.produtos = response);
+    }
+
+    delete(id){
+
+    }
 
 }

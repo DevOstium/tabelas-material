@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material';
 import { TabelaFullComponent } from './tabela/tabela-full.component';
 import { TabelaFullPesquisaModule } from './pesquisa/tabela-full-pesquisa.module';
+import { ProdutoService } from './services/produto.service';
 
 @NgModule({
     declarations: [TabelaFullComponent],
@@ -19,6 +20,6 @@ import { TabelaFullPesquisaModule } from './pesquisa/tabela-full-pesquisa.module
         ReactiveFormsModule,
         TabelaFullPesquisaModule
     ],
-    providers : []
+    providers : [ProdutoService]
 })
 export class TabelaFullModule {}

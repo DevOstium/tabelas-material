@@ -1,49 +1,141 @@
-<h1>Pesquisa Categorias</h1>
+<div class="card">
 
-
-<form class="example-form" [formGroup]='categoriaForm'>
-     
-    <mat-form-field class="example-full-width">
-          <input matInput 
-                 placeholder="Busca por Categoria" 
-                 [matAutocomplete]="auto" 
-                 formControlName='userInput'
-                 (keyup)="pesquisa.next($event.target.value)"
-                 >
-    </mat-form-field>
-
-    <span>Pesquisa: {{categoriaForm.get('userInput').value | json}}</span>
-  
-    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-
-          <mat-option *ngIf="isLoading" class="is-loading"><mat-spinner diameter="50"></mat-spinner></mat-option>
-
-          <ng-container *ngIf="!isLoading">
-              <mat-option *ngFor="let categoria of categorias" [value]="categoria">
-                      <span (click)="loadTable(categoria.nome)" >{{ categoria.nome }}</span>
-                      <small  > | ID: {{categoria.id}}</small>
-              </mat-option>
-          </ng-container>
-
-    </mat-autocomplete>
-
-    <div class="card">
+        <h5 class="card-header">
+                Pesquisa:
+        </h5>
         <div class="card-body">
-            <table class="lessons-table mat-elevation-z7 table-stats table table-striped table-bordered" *ngIf="(table$ | async) as items">
 
-                <thead>
-                    <th>#</th>
-                    <th>Nome</th>
-                </thead>
+            <form class="form-full-table" [formGroup]='categoriaForm'>
 
-                <tr *ngFor="let i of items">
-                    <td class="seqno-cell">{{i.id}}</td>
-                    <td class="description-cell">{{i.nome}}</td>
-                </tr>
 
-            </table>
+                <div class="row">
+                    <div class="col-sm-4">
+                               
+                        <mat-form-field class="full-width-input">
+                            <input matInput 
+                                    placeholder="Busca por Produto" 
+                                    [matAutocomplete]="auto" 
+                                    formControlName='userInput'
+                                    (keyup)="pesquisa.next($event.target.value)"
+                                    >
+                        </mat-form-field>
+            
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        
+                            <mat-option *ngIf="isLoading" class="is-loading"><mat-spinner diameter="50"></mat-spinner></mat-option>
+        
+                            <ng-container *ngIf="!isLoading">
+                                <mat-option *ngFor="let categoria of categorias" [value]="categoria">
+                                        <span (click)="loadTable(categoria.id)" >{{ categoria.nome }}</span>
+                                        <small  > | ID: {{categoria.id}}</small>
+                                </mat-option>
+                            </ng-container>
+        
+                        </mat-autocomplete>        
+        
 
-        </div>
-    </div>
 
-</form>
+
+                    </div>
+                    <div class="col-sm-3">
+
+
+                        <mat-form-field class="full-width-input">
+                            <input matInput 
+                                    placeholder="Busca por Categoria" 
+                                    [matAutocomplete]="auto" 
+                                    formControlName='userInput'
+                                    (keyup)="pesquisa.next($event.target.value)"
+                                    >
+                        </mat-form-field>
+            
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        
+                            <mat-option *ngIf="isLoading" class="is-loading"><mat-spinner diameter="50"></mat-spinner></mat-option>
+        
+                            <ng-container *ngIf="!isLoading">
+                                <mat-option *ngFor="let categoria of categorias" [value]="categoria">
+                                        <span (click)="loadTable(categoria.id)" >{{ categoria.nome }}</span>
+                                        <small  > | ID: {{categoria.id}}</small>
+                                </mat-option>
+                            </ng-container>
+        
+                        </mat-autocomplete>        
+                    </div>
+                    
+                    <div class="col-sm-2">
+
+                        <mat-form-field class="full-width-input">
+                                <input matInput 
+                                       [min]="minDate" 
+                                       [max]="maxDate" 
+                                       [matDatepicker]="picker" 
+                                       placeholder="Data Inicial">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+
+                    </div>
+                    <div class="col-sm-2">
+
+                            <mat-form-field class="full-width-input">
+                                    <input matInput 
+                                           [min]="minDate" 
+                                           [max]="maxDate" 
+                                           [matDatepicker]="datapicker" 
+                                           placeholder="Data Final">
+                                    <mat-datepicker-toggle matSuffix [for]="datapicker"></mat-datepicker-toggle>
+                                    <mat-datepicker #datapicker></mat-datepicker>
+                            </mat-form-field>
+    
+                    </div>    
+
+
+                    <div class="col-sm-1">    
+                        <label class="example-h2">Inativos</label>
+                        <section class="example-section">
+                                <mat-slide-toggle
+                                    class="example-margin"
+                                    [color]="color"
+                                    [checked]="checked"
+                                    [disabled]="disabled">
+                                </mat-slide-toggle>
+                        </section>
+                                 
+                    </div>                
+
+
+                </div> <!--row-->
+
+             
+
+
+
+        
+              
+    
+                <table class="lessons-table mat-elevation-z7 table-stats table table-striped table-bordered">
+
+                    <thead>
+                        <th>#</th>
+                        <th>Nome</th>
+                        <th> <a><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></th>
+                        <th>
+                            <a>
+                                <i class="fa fa-trash-o" style="color:red"></i>
+                            </a>
+                        </th>
+                    </thead>
+
+                    <tr *ngFor="let i of produtos">
+                        <td class="seqno-cell">{{i.id}}</td>
+                        <td class="description-cell">{{i.nome}}</td>
+                        <td><a routerLink="{{i.id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                        <td> <a (click)="delete(i.id)" style="cursor: pointer" ><i class="fa fa-trash-o" style="color:red"></i></a></td>
+                    </tr>
+
+                </table>
+            </form>
+    </div><!--card-body-->
+
+</div>

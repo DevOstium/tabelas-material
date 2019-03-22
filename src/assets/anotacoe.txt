@@ -1,0 +1,134 @@
+
+
+//-------------------------------------------------
+		Paginação
+
+	
+	
+	E3ZQ3-TTUD9-22SFH-B4WEH-TQYSP
+
+//-------------------------------------------------
+	
+		Dependências
+		
+	npm i @angular/material @angular/cdk @angular/animations bootstrap hammerjs font-awesome material-design-icons
+	
+	npm i @ng-bootstrap/ng-bootstrap
+	
+	
+	
+	$ git config  user.name "Ostium Dev"
+	$ git config  user.email ostiumdev@gmail.com
+
+	$ git config user.name
+	$ git config user.email
+
+//-------------------------------------------------
+
+
+	{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+       
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome against localhost",
+            "url": "http://localhost:4200",
+            "webRoot": "${workspaceFolder}"
+        }
+    ]
+}
+
+
+https://www.redhat.com/pt-br/services/training/do092-developing-cloud-native-applications-microservices-architectures?intcmp=701f2000001OEGcAAO
+//-------------------------------------------------
+//-------------------------------------------------
+
+
+
+	cat ~/.ssh/id_rsa.pub
+	ssh-keygen -t rsa -C "lirafagner@gmail.com" -b 4096
+	cat ~/.ssh/id_rsa.pub | clip
+	
+	ssh -T git@gitlab.com:lirafagner/git-flow.git
+
+
+	ssh-keygen -t rsa -C "lirafagner@gmail.com" -b 4096
+
+
+//-------------------------------------------------
+
+		Alterar o caminho do git remote
+	
+	Antes
+	$ git remote -v
+	origin  http://192.168.10.43/internos/fenix/frontend/fenix-frontend.git (fetch)
+	origin  http://192.168.10.43/internos/fenix/frontend/fenix-frontend.git (push)
+	
+	Atual
+	$ git remote set-url origin http://192.168.10.43/internos/fenix/frontend/frontend.git
+	$ git remote -v
+	origin  http://192.168.10.43/internos/fenix/frontend/frontend.git (fetch)
+	origin  http://192.168.10.43/internos/fenix/frontend/frontend.git (push)
+
+
+//-------------------------------------------------
+
+	https://medium.com/codigorefinado/performance-em-angular-dicas-e-truques-deeb6cb3860c
+	
+	Ao utilizar o Angular Universal, não se esqueça de que não temos um window,
+	document ou jQuery, pois o trabalho não é feito dentro de um navegador,
+	logo não os utilize. 
+	
+	Porém, existem alternativas para manipular o DOM, como, ElementRef, Renderer e ViewContainer.
+
+
+//-------------------------------------------------
+	
+	AoT Ahead Of Time   
+	O build é mais demorando mas a execução do código no cliente é mais rápido
+	
+	ng build —-aot
+	ng serve —— aot
+	
+	Lodash decorators — @Memoize()
+	npm i lodash._htmlunescapes
+
+//-------------------------------------------------
+//-------------------------------------------------
+//-------------------------------------------------
+//-------------------------------------------------
+//-------------------------------------------------
+//-------------------------------------------------
+//-------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
