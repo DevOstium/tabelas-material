@@ -1,21 +1,29 @@
 <div class="card">
 
-        <h5 class="card-header">
-                Pesquisa:
-        </h5>
-        <div class="card-body">
+       <div class="card-header"> 
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h5 class="mt-3" >Produtos:</h5>
+                    </div>
+                    <div class="col-sm-8">               
+                            <button type="button" class="pull-right btn btn-outline-success">Cadastrar</button>
+                    </div>   
+                </div> 
+        </div>
 
-            <form class="form-full-table" [formGroup]='categoriaForm'>
+        <div class="card-header card-body">
+
+            <form [formGroup]='categoriaForm'>
 
 
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-sm-5">
                                
                         <mat-form-field class="full-width-input">
                             <input matInput 
                                     placeholder="Busca por Produto" 
                                     [matAutocomplete]="auto" 
-                                    formControlName='userInput'
+                                    formControlName='produto'
                                     (keyup)="pesquisa.next($event.target.value)"
                                     >
                         </mat-form-field>
@@ -37,14 +45,14 @@
 
 
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
 
 
                         <mat-form-field class="full-width-input">
                             <input matInput 
                                     placeholder="Busca por Categoria" 
                                     [matAutocomplete]="auto" 
-                                    formControlName='userInput'
+                                    formControlName='categoria'
                                     (keyup)="pesquisa.next($event.target.value)"
                                     >
                         </mat-form-field>
@@ -70,6 +78,7 @@
                                        [min]="minDate" 
                                        [max]="maxDate" 
                                        [matDatepicker]="picker" 
+                                       formControlName='dataInicial'
                                        placeholder="Data Inicial">
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
@@ -82,7 +91,8 @@
                                     <input matInput 
                                            [min]="minDate" 
                                            [max]="maxDate" 
-                                           [matDatepicker]="datapicker" 
+                                           [matDatepicker]="datapicker"
+                                           formControlName='dataFinal' 
                                            placeholder="Data Final">
                                     <mat-datepicker-toggle matSuffix [for]="datapicker"></mat-datepicker-toggle>
                                     <mat-datepicker #datapicker></mat-datepicker>
@@ -92,49 +102,21 @@
 
 
                     <div class="col-sm-1">    
-                        <label class="example-h2">Inativos</label>
-                        <section class="example-section">
-                                <mat-slide-toggle
-                                    class="example-margin"
-                                    [color]="color"
-                                    [checked]="checked"
-                                    [disabled]="disabled">
-                                </mat-slide-toggle>
-                        </section>
-                                 
-                    </div>                
-
-
-                </div> <!--row-->
-
-             
-
-
-
-        
+                        <label class="">Inat.</label>
+                        <section class="">
+                            <mat-slide-toggle    formControlName='inativo'
+                            class="example-margin"
+                            [color]="color"
+                            [checked]="checked"
+                            [disabled]="disabled">
+                        </mat-slide-toggle>
+                    </section>
+                </div>     
+                            
               
-    
-                <table class="lessons-table mat-elevation-z7 table-stats table table-striped table-bordered">
-
-                    <thead>
-                        <th>#</th>
-                        <th>Nome</th>
-                        <th> <a><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></th>
-                        <th>
-                            <a>
-                                <i class="fa fa-trash-o" style="color:red"></i>
-                            </a>
-                        </th>
-                    </thead>
-
-                    <tr *ngFor="let i of produtos">
-                        <td class="seqno-cell">{{i.id}}</td>
-                        <td class="description-cell">{{i.nome}}</td>
-                        <td><a routerLink="{{i.id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-                        <td> <a (click)="delete(i.id)" style="cursor: pointer" ><i class="fa fa-trash-o" style="color:red"></i></a></td>
-                    </tr>
-
-                </table>
+                
+                              
+                </div> <!--row-->
             </form>
     </div><!--card-body-->
 

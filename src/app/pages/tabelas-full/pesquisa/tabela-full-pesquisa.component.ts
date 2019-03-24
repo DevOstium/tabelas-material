@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { debounceTime, tap,  finalize, switchMap } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
@@ -17,14 +17,15 @@ export class TabelaFullPesquisaComponent implements OnInit, OnDestroy {
     categorias    : Categoria[] = [];
     categoriaForm : FormGroup;
     isLoading     = false;
+    minDate       = new Date(2019, 3, 20);
+    maxDate       = new Date(2019, 3, 24);
 
     produtos : Produto[] = [];    
-
     pesquisa : Subject<string> = new Subject<string>();
-    
-    minDate = new Date(2019, 3, 20);
-    maxDate = new Date(2019, 3, 24);
 
+    @Output() 
+    paramsPesquisaProduto = new EventEmitter<string>();
+    
     constructor(
                 private  formBuilder       : FormBuilder,
                 private  categoriaService  : CategoriaService,
@@ -33,11 +34,20 @@ export class TabelaFullPesquisaComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
 
+        this.categoriaForm = this.formBuilder.group(
+                                                      { 
+                                                        produto       : [''],
+                                                        categoria     : [''],  
+                                                        dataInicial   : [''],
+                                                        dataFinal     : [''],   
+                                                        inativo       : [''],
+                                                     }
+                                                ); 
+
         this.pesquisa
             .pipe(
                     debounceTime(400),
                     tap( () => this.isLoading = true ),
-                    //tap( search => (search) ? search : this.loadTable( )),
                     switchMap( search =>  {
                                         console.log("search send to server: " , search)       
                                         return   this.categoriaService.findAll(search)
@@ -49,7 +59,7 @@ export class TabelaFullPesquisaComponent implements OnInit, OnDestroy {
                                                 this.categorias = response;
                                             }                
                             ); 
-        this.categoriaForm = this.formBuilder.group({ userInput: null  });  
+         
     }
 
     displayFn( categoria : Categoria ){
@@ -63,9 +73,11 @@ export class TabelaFullPesquisaComponent implements OnInit, OnDestroy {
         this.pesquisa.unsubscribe();
     }
 
-    loadTable( categorias = '' ){
-        console.log("categorias : " , categorias)
-        this.produtoService.findAll().subscribe( response => this.produtos = response);
+    sendParamTableProdutos(  ){
+        console.log("sendParamTableProdutos() ")
+
+        this.paramsPesquisaProduto.emit( this.categoriaForm.getRawValue());
+        
     }
 
     delete(id){

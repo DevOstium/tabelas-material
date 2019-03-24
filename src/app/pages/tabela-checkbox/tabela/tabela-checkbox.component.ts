@@ -2,6 +2,7 @@ import {SelectionModel} from '@angular/cdk/collections';
 import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
 import { TabelaCheckboxService } from '../services/tabela-checkbox.service';
+
 import { Produto } from '../domain/tabela-checkbox.model';
 
 @Component({
