@@ -18,14 +18,17 @@
 
                 <div class="row">
                     <div class="col-sm-5">
-                               
+                              
                         <mat-form-field class="full-width-input">
-                            <input matInput 
-                                    placeholder="Busca por Produto" 
-                                    [matAutocomplete]="auto" 
-                                    formControlName='produto'
-                                    (keyup)="pesquisa.next($event.target.value)"
-                                    >
+                           
+                                     <input matInput 
+                                            placeholder="Busca por Produto" 
+                                            [matAutocomplete]="auto" 
+                                            formControlName='produto'
+                                            (keyup)="pesquisa.next($event.target.value)"
+                                            (click)="loadProdutosInput()"
+                                            >
+                                            <mat-icon (click)="loadProdutosInput()" matSuffix  class="is-loading" > search    </mat-icon>
                         </mat-form-field>
             
                         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
@@ -33,10 +36,14 @@
                             <mat-option *ngIf="isLoading" class="is-loading"><mat-spinner diameter="50"></mat-spinner></mat-option>
         
                             <ng-container *ngIf="!isLoading">
-                                <mat-option *ngFor="let categoria of categorias" [value]="categoria">
-                                        <span (click)="loadTable(categoria.id)" >{{ categoria.nome }}</span>
-                                        <small  > | ID: {{categoria.id}}</small>
-                                </mat-option>
+                                
+                                <mat-select>
+                                    <mat-option *ngFor="let categoria of categorias" [value]="categoria">
+                                            <span (click)="loadTable(categoria.id)" >{{ categoria.nome }}</span>
+                                            <small  > | ID: {{categoria.id}}</small>
+                                    </mat-option>
+                                </mat-select>
+
                             </ng-container>
         
                         </mat-autocomplete>        

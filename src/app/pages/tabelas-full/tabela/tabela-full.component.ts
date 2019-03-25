@@ -6,7 +6,7 @@ import { Produto } from '../domain/produto.model';
 import { ProdutoService } from '../services/produto.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ParamPaginacao } from '../domain/param-paginacao';
-import { tap } from 'rxjs/operators';
+import { tap, delay, debounceTime } from 'rxjs/operators';
 
 
 @Component({
@@ -25,9 +25,7 @@ export class TabelaFullComponent implements OnInit , AfterViewInit {
   backgroundTR = false;
   
 
-  resultsLength = 0;
-  isLoadingResults = true;
-  isRateLimitReached = false; 
+  isLoadingResults = false;
 
   @ViewChild(MatPaginator)
   paginator: MatPaginator;
@@ -45,15 +43,16 @@ export class TabelaFullComponent implements OnInit , AfterViewInit {
   
   ngOnInit(): void {
       this.paginator.pageSizeOptions = this.linhaPorPagina;
-
+      this.isLoadingResults = true; 
       this.produtoService.findAll().subscribe( response => {
-                                                          console.log("response['content']", response)
+                                                          //console.log("response['content']", response)
                                                           this.produto =  response['content']
                                                           //console.log(" this.produto : " , this.produto)
                                                           this.dataSource             = new MatTableDataSource<Produto>(this.produto);
+                                                          this.paginator.length       = response['totalElements'];
+                                                          this.paginator.pageSize     = 4;
                                                           this.dataSource.paginator   = this.paginator;
-                                                          //this.dataSource.sort        = this.sort;
-                                                          this.isLoadingResults = false;
+                                                          this.isLoadingResults       = false;
                                                          
                                                         }
                                          )
@@ -63,34 +62,33 @@ export class TabelaFullComponent implements OnInit , AfterViewInit {
    
     this.sort.sortChange.subscribe(
       
-      () => {  
-        this.isLoadingResults = true
-        console.log("click")
-        console.log("order by ", this.sort.active, " direction " , this.sort.direction, " pagina ", this.paginator.pageIndex)
+          () => {  
+            this.isLoadingResults = true
+            console.log("click")
+            console.log("order by ", this.sort.active, " direction " , this.sort.direction, " pagina ", this.paginator.pageIndex)
 
-          const orderBy =  this.sort.active;
-          const direction = this.sort.direction;
-          const pagina = 0; 
+              const orderBy =  this.sort.active;
+              const direction = this.sort.direction;
+              const pagina = 0; 
 
-          this.produtoService.getSortProdutosPaginados(orderBy, direction.toUpperCase() , pagina)
-                            .subscribe( response => {
+              this.produtoService.getSortProdutosPaginados(orderBy, direction.toUpperCase() , pagina)
+                                 .subscribe( response => {
 
-                                                        this.produto = [];
-                                                        console.log("response['content']", response)
-                                                        this.produto =  response['content']
-                                                        console.log(" this.produto : " , this.produto)
-                                                        this.dataSource             = new MatTableDataSource<Produto>(this.produto);
-                                                        //this.dataSource.paginator   = this.paginator;
-                                                        console.log("response['totalElements'] : " , response['totalElements'])
-                                                        this.paginator.length = response['totalElements'];
-                                                        console.log("this.paginator.getNumberOfPages" , this.paginator.getNumberOfPages())
+                                                            this.produto = [];
+                                                            //console.log("response['content']", response)
+                                                            this.produto =  response['content']
+                                                            //console.log(" this.produto : " , this.produto)
+                                                            this.dataSource             = new MatTableDataSource<Produto>(this.produto);
+                                                            //this.dataSource.paginator   = this.paginator;
+                                                            //console.log("response['totalElements'] : " , response['totalElements'])
+                                                            this.paginator.length = response['totalElements'];
+                                                            //console.log("this.paginator.getNumberOfPages" , this.paginator.getNumberOfPages())
+                                                            this.isLoadingResults = false;
+                                                        }                
+                                          );
 
-                                                         this.isLoadingResults = false
-                                                    }                
-                                      );
 
-
-      }
+          }
       );
       
       
@@ -113,14 +111,14 @@ export class TabelaFullComponent implements OnInit , AfterViewInit {
           this.produtoService.getProdutosPaginados(params).subscribe( response => {
 
                                                                   this.produto = [];
-                                                                  console.log("response['content']", response)
+                                                                  //console.log("response['content']", response)
                                                                   this.produto =  response['content']
-                                                                  console.log(" this.produto : " , this.produto)
+                                                                  //console.log(" this.produto : " , this.produto)
                                                                   this.dataSource             = new MatTableDataSource<Produto>(this.produto);
                                                                   //this.dataSource.paginator   = this.paginator;
-                                                                  console.log("response['totalElements'] : " , response['totalElements'])
+                                                                  //console.log("response['totalElements'] : " , response['totalElements'])
                                                                   this.paginator.length = response['totalElements'];
-                                                                  console.log("this.paginator.getNumberOfPages" , this.paginator.getNumberOfPages())
+                                                                  //console.log("this.paginator.getNumberOfPages" , this.paginator.getNumberOfPages())
                                                                   //this.dataSource.sort        = this.sort;
           
                                                                               }

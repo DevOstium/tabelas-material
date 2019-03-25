@@ -4,6 +4,7 @@ import {MatTableDataSource} from '@angular/material';
 import { TabelaCheckboxService } from '../services/tabela-checkbox.service';
 
 import { Produto } from '../domain/tabela-checkbox.model';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector     : 'tabela-checkbox',
@@ -12,6 +13,8 @@ import { Produto } from '../domain/tabela-checkbox.model';
 })
 export class TabelaCheckboxComponent implements OnInit {
   
+  faCoffee = faCoffee; 
+
   produto : Produto[] = [];
 
   displayedColumns : string[] = ['select', 'id', 'nome', 'estoque', 'prazoValidade', 'precoVenda'];

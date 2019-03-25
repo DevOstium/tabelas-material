@@ -84,4 +84,13 @@ export class TabelaFullPesquisaComponent implements OnInit, OnDestroy {
 
     }
 
+    loadProdutosInput(){
+        console.log("Load P")
+        this.categoriaService.findAll().subscribe(  response => {
+                                                            console.log("loadProdutosInput : " , response)
+                                                            this.categorias = response;
+                                                        }                
+                                                ); 
+    }
+
 }

@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material';
 import { TabelaCheckboxService } from './services/tabela-checkbox.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
     declarations: [TabelaCheckboxComponent],
@@ -16,7 +17,8 @@ import { TabelaCheckboxService } from './services/tabela-checkbox.service';
         FormsModule,
         HttpClientModule,
         MatNativeDateModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        FontAwesomeModule
     ],
     providers : [TabelaCheckboxService]
 })

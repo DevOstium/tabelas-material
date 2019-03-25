@@ -53,3 +53,9 @@
   .mat-column-created {
     max-width: 124px;
   }
+
+  .spinner-container {
+    height: 360px;
+    width: 390px;
+    position: fixed;
+}

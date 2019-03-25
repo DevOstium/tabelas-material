@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TabelaCheckboxModule } from './pages/tabela-checkbox/tabela-checkbox.module';
 import { TabelaFullModule } from './pages/tabelas-full/tabale-full.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { TabelaFullModule } from './pages/tabelas-full/tabale-full.module';
     BrowserModule,
     AppRoutingModule,
     TabelaCheckboxModule,
-    TabelaFullModule
+    TabelaFullModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
