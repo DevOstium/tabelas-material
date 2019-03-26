@@ -5,7 +5,7 @@ import { Subject, Observable } from 'rxjs';
 import { MatAutocomplete, MatChipInputEvent, MatAutocompleteSelectedEvent } from '@angular/material';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { CategoriaService } from '../../services/categoria.service';
-import { Categoria } from '../../domain/categoria.model';
+import { Categoria, CategoriaPesquisa } from '../../domain/categoria.model';
 
 @Component({
     selector : 'categoria-pesquisa',
@@ -74,25 +74,38 @@ export class CategoriaPesquisaComponent implements OnInit{
 
       //this.fullList.filter() pagar o item na full list e inserir novamente na filteredFruits
 
-            this.filteredFruits.push()
+           // this.filteredFruits.push()
    
+
+           //this.fullList.filter( item => item.nome.indexOf(fruit) )
+
+           //this.filteredFruits = this.fullList;
+
+           //this.filteredFruits = this.filteredFruits.concat(  this._filterAllList(fruit)    )
+           
+           this.filteredFruits = this.filteredFruits.concat(  this.fullList.filter(  item => item.nome.includes(fruit) )    )
+           
+           //this.filteredFruits.concat(  this.fullList.filter(  item => item.nome.includes(fruit) )   );
    
     }
   }
 
+  private _filterAllList( obj : string) : Categoria[] {
+      return  this.fullList.filter( ( item : Categoria) => item.nome.includes(obj) ).map( c => new CategoriaPesquisa(c.id, c.nome));
+  }
+
   selected(event: MatAutocompleteSelectedEvent): void {
 
-    const index = this.fruits.indexOf(event.option.viewValue);
+        const index          = this.fruits.indexOf(event.option.viewValue);
+        const indexFiltrados = this.filteredFruits.indexOf(event.option.value);
 
-    this.fruits.filter( categoria => categoria.toLowerCase().includes(event.option.viewValue.toLowerCase()) );
+        if (index <= -1 && indexFiltrados == 0 ) {
+              this.fruits.push(event.option.viewValue);
+              this.filteredFruits.splice( indexFiltrados, 1);
+        }
 
-    if (index <= -1) {
-        this.fruits.push(event.option.viewValue);
-        this.filteredFruits =  this.filteredFruits.splice( this.filteredFruits.indexOf(event.option.value)+1   , this.filteredFruits.length);
-    }
-
-           this.fruitInput.nativeElement.value = '';
-            this.fruitCtrl.setValue(null);
+        this.fruitInput.nativeElement.value = '';
+        this.fruitCtrl.setValue(null);
   }
 
   private _filter(value: Categoria): Categoria[] {

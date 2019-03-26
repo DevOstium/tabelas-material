@@ -13,6 +13,8 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 })
 export class TabelaCheckboxComponent implements OnInit {
   
+  selectDisabled = true;
+
   faCoffee = faCoffee; 
 
   produto : Produto[] = [];
@@ -32,7 +34,8 @@ export class TabelaCheckboxComponent implements OnInit {
                                                         }
                                          )
   }
- 
+
+
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
         const numSelected  = this.selection.selected.length;

@@ -2,6 +2,32 @@
 
 <h1>Tabela Checkbox 
 
+
+
+    <div class="row">
+        <div class="col-sm-6">
+
+            <mat-form-field class="">
+              <input matInput 
+                    placeholder="Company (disabled)" 
+                    value="Google"
+                    [disabled]="selectDisabled"
+                    >
+            </mat-form-field>
+        </div>
+        <div class="col-sm-2">  
+            <button (click)="selectDisabled = !selectDisabled" mat-icon-button>
+                    <div *ngIf="selectDisabled; then thenBlock else elseBlock"></div>
+                    <ng-template #thenBlock><i class="material-icons">edit</i></ng-template>
+                    <ng-template #elseBlock><i class="material-icons">save_alt</i></ng-template>
+            </button>
+            <pre>disabled: {{ selectDisabled }}</pre>
+      </div>
+
+    </div>
+
+ 
+    
        <a>
             <i class="fa fa-trash-o" style="color:red"></i>
             <i class="fas fa-search-plus"></i>
