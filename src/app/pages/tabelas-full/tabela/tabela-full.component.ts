@@ -166,7 +166,7 @@ export class TabelaFullComponent implements OnInit , AfterViewInit {
   }
 
   loadTabelaProdutos(params){
-      //console.log(" params recebido com sucesso : ", params)
+      console.log(" params recebido com sucesso : ", params)
   }
 
 

@@ -71,22 +71,7 @@ export class CategoriaPesquisaComponent implements OnInit{
   
     if (index >= 0) {
       this.fruits.splice(index, 1);
-
-      //this.fullList.filter() pagar o item na full list e inserir novamente na filteredFruits
-
-           // this.filteredFruits.push()
-   
-
-           //this.fullList.filter( item => item.nome.indexOf(fruit) )
-
-           //this.filteredFruits = this.fullList;
-
-           //this.filteredFruits = this.filteredFruits.concat(  this._filterAllList(fruit)    )
-           
-           this.filteredFruits = this.filteredFruits.concat(  this.fullList.filter(  item => item.nome.includes(fruit) )    )
-           
-           //this.filteredFruits.concat(  this.fullList.filter(  item => item.nome.includes(fruit) )   );
-   
+      this.filteredFruits = this.filteredFruits.concat(  this.fullList.filter(  item => item.nome.includes(fruit) )    )
     }
   }
 
