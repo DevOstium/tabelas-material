@@ -1,4 +1,4 @@
-  .is-loading ::ng-deep .mat-option-text {
+.is-loading ::ng-deep .mat-option-text {
     display: flex;
     justify-content: center;
   }
@@ -6,8 +6,4 @@
   .full-width-input {
     width: 100%;
   }
-  
- 
-  
-
   

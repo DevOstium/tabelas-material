@@ -9,10 +9,11 @@ import { TabelaFullPesquisaComponent } from './tabela-full-pesquisa.component';
 import { CategoriaService } from '../services/categoria.service';
 import { ProdutoService } from '../services/produto.service';
 import { RouterModule } from '@angular/router';
+import { CategoriaPesquisaComponent } from './categoria/catgeoria-pesquisa.component';
 
 @NgModule({
-    declarations : [TabelaFullPesquisaComponent],
-    exports:[TabelaFullPesquisaComponent],
+    declarations : [TabelaFullPesquisaComponent, CategoriaPesquisaComponent],
+    exports:[TabelaFullPesquisaComponent, CategoriaPesquisaComponent],
     imports: [
         CommonModule,
         BrowserAnimationsModule,
