@@ -1,0 +1,78 @@
+
+
+<!--['select', 'id', 'nome', 'estoque', 'prazoValidade', 'precoVenda', 'inativo' ];-->
+
+    <div class="card ">
+
+        <div class="card-header">
+            <div class="row">
+                <div class="col-sm-4">
+                    <h5 class="mt-2 ml-3" >Cadastro:</h5>
+                </div>
+                <div class="col-sm-8">               
+                        <button type="button" class="mt-1 mr-3 pull-right btn btn-outline-success">Salvar</button>
+                </div>   
+            </div> 
+        </div>
+
+        <mat-tab-group>
+
+        <div class="card-body">   
+         
+             <mat-tab label="First"> Content 1  
+                <form [formGroup]="produtoForm" class="" (submit)="salvar()">
+                  
+                          <div class="row">
+                                <div class="col-sm-4" >
+                                    <mat-form-field class="full-width-input">
+                                          <input formControlName="nome" 
+                                                cdkFocusInitial 
+                                                matInput 
+                                                placeholder="Nome">
+                                    </mat-form-field>
+                                </div>     
+                                <div class="col-sm-4">
+                                      <mat-form-field class="full-width-input">
+                                          <input formControlName="nome" 
+                                                matInput 
+                                                type="number"
+                                                placeholder="Estoque">  
+                                      </mat-form-field>
+                                </div>
+                                <div class="col-sm-4">
+                                      <mat-form-field class="full-width-input">
+                                        <input formControlName="prazoValidade" 
+                                              matInput 
+                                              [matDatepicker]="picker"
+                                              placeholder="Prazo de Validade">  
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>  
+                                        <mat-datepicker #picker></mat-datepicker>    
+                                    </mat-form-field>
+                                </div>    
+                          </div>
+              </form>           
+            </mat-tab>   
+            <mat-tab label="Second"> Content 2 
+            
+                      <div class="row">
+                            <div class="col-sm-4">
+                                <mat-form-field class="full-width-input">
+                                    <input formControlName="precoVenda" 
+                                           matInput 
+                                           type="number"
+                                           placeholder="Preço de venda R$">  
+                                </mat-form-field>
+                            </div>
+                      </div>
+            </mat-tab>
+                      <div class="row">
+                          <button mat-raised-button color="warn">Sair sem salvar</button>
+                      </div>
+            
+       </div>  
+       
+      </mat-tab-group>
+ </div> 
+
+
+

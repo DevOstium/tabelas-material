@@ -10,6 +10,7 @@ import { CategoriaService } from '../services/categoria.service';
 import { ProdutoService } from '../services/produto.service';
 import { RouterModule } from '@angular/router';
 import { CategoriaPesquisaComponent } from './categoria/catgeoria-pesquisa.component';
+import { ModalModule } from '../modal/modal.module';
 
 @NgModule({
     declarations : [TabelaFullPesquisaComponent, CategoriaPesquisaComponent],
@@ -21,7 +22,8 @@ import { CategoriaPesquisaComponent } from './categoria/catgeoria-pesquisa.compo
         HttpClientModule,
         ReactiveFormsModule,
         RouterModule,
-        MaterialModule
+        MaterialModule,
+        ModalModule
     ],
     providers: [CategoriaService, ProdutoService]
 })

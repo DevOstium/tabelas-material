@@ -25,7 +25,6 @@ export class TabelaFullPesquisaComponent implements OnInit, OnDestroy {
     produtos : Produto[] = [];    
     pesquisa : Subject<string> = new Subject<string>();
     paramsCategoria : Categoria[] = [];
-    
 
     @Output() 
     paramsPesquisaProduto = new EventEmitter<string[]>();
@@ -37,7 +36,6 @@ export class TabelaFullPesquisaComponent implements OnInit, OnDestroy {
                 ){}
 
     ngOnInit(): void {
-   
         this.categoriaForm = this.formBuilder.group(
                                                       { 
                                                         produto       : [''],
@@ -63,11 +61,6 @@ export class TabelaFullPesquisaComponent implements OnInit, OnDestroy {
                                                         this.categorias = response;
                                                     }                
                                 ); 
-
-
-
-
-         
     }
 
     displayFn( categoria : Categoria ){
@@ -81,19 +74,12 @@ export class TabelaFullPesquisaComponent implements OnInit, OnDestroy {
         this.pesquisa.unsubscribe();
     }
 
-    sendParamTableProdutos(  ){
-        //console.log("paramsCategoria  ", this.paramsCategoria)
-
+    sendParamTableProdutos(){
         this.categoriaForm.get('categoria').setValue(this.paramsCategoria);
-
-        //const params : string[] = [this.categoriaForm.getRawValue(),this.paramsCategoria ]
-
         this.paramsPesquisaProduto.emit(this.categoriaForm.getRawValue());
-        
     }
 
     delete(id){
-
     }
 
     loadProdutosInput(){
@@ -104,6 +90,5 @@ export class TabelaFullPesquisaComponent implements OnInit, OnDestroy {
                                                         }                
                                                 ); 
     }
-
 
 }  // end Class

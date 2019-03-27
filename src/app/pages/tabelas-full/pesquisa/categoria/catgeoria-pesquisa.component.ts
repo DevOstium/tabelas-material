@@ -65,7 +65,7 @@ export class CategoriaPesquisaComponent implements OnInit{
           const index          = this.fruits.indexOf(event.option.value);
           const indexFiltrados = this.filteredFruits.indexOf(event.option.value);
 
-          if (index <= -1 && indexFiltrados == 0 ) {
+          if (index == -1 && indexFiltrados != -1 ) {
                 this.fruits.push(event.option.value);
                 this.filteredFruits.splice( indexFiltrados, 1);
                 this.paramsPesquisaCategoria.emit(this.fruits);

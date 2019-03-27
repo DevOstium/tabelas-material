@@ -18,7 +18,7 @@ import { tap, delay, debounceTime } from 'rxjs/operators';
 export class TabelaFullComponent implements OnInit , AfterViewInit {
     
   produto           : Produto[] = [];
-  displayedColumns  : string[] = ['select', 'id', 'nome', 'estoque', 'prazoValidade', 'precoVenda', 'inativo' ];
+  displayedColumns  : string[]  = ['select', 'id', 'nome', 'estoque', 'prazoValidade', 'precoVenda', 'inativo' ];
   dataSource        : any;
   selection         = new SelectionModel<Produto>(true, []);
   
