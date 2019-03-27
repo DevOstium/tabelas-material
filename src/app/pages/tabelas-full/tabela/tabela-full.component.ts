@@ -58,6 +58,40 @@ export class TabelaFullComponent implements OnInit , AfterViewInit {
                                          )
   }
 
+
+
+  //Apartir daqui eu envio os parametros para carregar a tabela
+  loadTabelaProdutos(params){
+
+    //params.map(x=> console.log(x))
+
+     // console.log(" params recebido com sucesso : ", params)
+      //console.log("Filtar Produto ",  params.produto.id);
+      //console.log("Filtar categorias ",  params.categoria.map( categoria => categoria.id));
+
+      const categorias =  params.categoria.map( categoria => categoria.id);
+ 
+      //e finalmente fazer a chamada da API
+      this.produtoService.findProdutosByFiltros(categorias).subscribe( response => {
+                                                                                    console.log(" findProdutosByFiltros    ", response)
+                                                                                    this.produto = [];
+                                                                                    //console.log("response['content']", response)
+                                                                                    this.produto =  response['content']
+                                                                                    //console.log(" this.produto : " , this.produto)
+                                                                                    this.dataSource             = new MatTableDataSource<Produto>(this.produto);
+                                                                                    //this.dataSource.paginator   = this.paginator;
+                                                                                    //console.log("response['totalElements'] : " , response['totalElements'])
+                                                                                    this.paginator.length = response['totalElements'];
+                                                                                    //console.log("this.paginator.getNumberOfPages" , this.paginator.getNumberOfPages())
+                                                                                    //this.dataSource.sort        = this.sort;
+                                                                                  
+                                                                                  }
+                                                                                                                                            
+                                                                     )
+  }
+
+
+
   ngAfterViewInit() {
    
     this.sort.sortChange.subscribe(
@@ -165,9 +199,7 @@ export class TabelaFullComponent implements OnInit , AfterViewInit {
     this.dataSource.data.forEach( row => this.selection.isSelected(row) ? this.backgroundTR = true : this.backgroundTR = false );
   }
 
-  loadTabelaProdutos(params){
-      console.log(" params recebido com sucesso : ", params)
-  }
+  
 
 
   salvar() {

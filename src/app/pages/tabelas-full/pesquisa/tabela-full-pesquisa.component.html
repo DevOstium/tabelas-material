@@ -16,100 +16,90 @@
             <form [formGroup]='categoriaForm'>
 
 
-                <div class="row">
-                    <div class="col-sm-5">
-                              
-                        <mat-form-field class="full-width-input">
-                           
-                                     <input matInput 
-                                            placeholder="Busca por Produto" 
-                                            [matAutocomplete]="auto" 
-                                            formControlName='produto'
-                                            (keyup)="pesquisa.next($event.target.value)"
-                                            (click)="loadProdutosInput()"
-                                            >
-                                            <mat-icon (click)="loadProdutosInput()" matSuffix  class="is-loading" > search    </mat-icon>
-                        </mat-form-field>
-            
-                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-        
-                            <mat-option *ngIf="isLoading" class="is-loading"><mat-spinner diameter="50"></mat-spinner></mat-option>
-        
-                            <ng-container *ngIf="!isLoading">
-                                
-                                <mat-select>
-                                    <mat-option *ngFor="let categoria of categorias" [value]="categoria">
-                                            <span (click)="loadTable(categoria.id)" >{{ categoria.nome }}</span>
-                                            <small  > | ID: {{categoria.id}}</small>
-                                    </mat-option>
-                                </mat-select>
-
-                            </ng-container>
-        
-                        </mat-autocomplete>        
-        
+                    <div class="row">
+                                    <div class="col-sm-5">
+                                            
+                                            <mat-form-field class="full-width-input">
+                                                    <input matInput 
+                                                            placeholder="Busca por Categoria" 
+                                                            [matAutocomplete]="auto" 
+                                                            formControlName='produto'
+                                                            (keyup)="pesquisa.next($event.target.value)"
+                                                            >
+                                                </mat-form-field>
+                        
+                                                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                        
+                                                    <mat-option *ngIf="isLoading" class="is-loading"><mat-spinner diameter="50"></mat-spinner></mat-option>
+                        
+                                                    <ng-container *ngIf="!isLoading">
+                                                        <mat-option *ngFor="let categoria of categorias" [value]="categoria">
+                                                                <span>{{ categoria.nome }}</span>
+                                                                <small  > | ID: {{categoria.id}}</small>
+                                                        </mat-option>
+                                                    </ng-container>
+                        
+                                                </mat-autocomplete>        
 
 
 
-                    </div>
-                    <div class="col-sm-6">
-                            <categoria-pesquisa></categoria-pesquisa>
+                                    </div>
+                                    <div class="col-sm-6">
+                                            <categoria-pesquisa (paramsPesquisaCategoria)=" paramsCategoria = $event"></categoria-pesquisa>
+                                    </div>
+                    
                     </div>
                     
 
+                    <div class="row">
+                                    <div class="col-sm-4">
+
+                                        <mat-form-field class="full-width-input">
+                                                <input matInput 
+                                                    [min]="minDate" 
+                                                    [max]="maxDate" 
+                                                    [matDatepicker]="picker" 
+                                                    formControlName='dataInicial'
+                                                    placeholder="Data Inicial">
+                                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                <mat-datepicker #picker></mat-datepicker>
+                                        </mat-form-field>
+
+                                    </div>
+                                    <div class="col-sm-4">
+
+                                            <mat-form-field class="full-width-input">
+                                                    <input matInput 
+                                                        [min]="minDate" 
+                                                        [max]="maxDate" 
+                                                        [matDatepicker]="datapicker"
+                                                        formControlName='dataFinal' 
+                                                        placeholder="Data Final">
+                                                    <mat-datepicker-toggle matSuffix [for]="datapicker"></mat-datepicker-toggle>
+                                                    <mat-datepicker #datapicker></mat-datepicker>
+                                            </mat-form-field>
+                    
+                                    </div>    
 
 
-
-
-
-
-
-                    <div class="col-sm-2">
-
-                        <mat-form-field class="full-width-input">
-                                <input matInput 
-                                       [min]="minDate" 
-                                       [max]="maxDate" 
-                                       [matDatepicker]="picker" 
-                                       formControlName='dataInicial'
-                                       placeholder="Data Inicial">
-                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker>
-                        </mat-form-field>
-
-                    </div>
-                    <div class="col-sm-2">
-
-                            <mat-form-field class="full-width-input">
-                                    <input matInput 
-                                           [min]="minDate" 
-                                           [max]="maxDate" 
-                                           [matDatepicker]="datapicker"
-                                           formControlName='dataFinal' 
-                                           placeholder="Data Final">
-                                    <mat-datepicker-toggle matSuffix [for]="datapicker"></mat-datepicker-toggle>
-                                    <mat-datepicker #datapicker></mat-datepicker>
-                            </mat-form-field>
-    
-                    </div>    
-
-
-                    <div class="col-sm-1">    
-                        <label class="">Inat.</label>
-                        <section class="">
-                            <mat-slide-toggle    formControlName='inativo'
-                            class="example-margin"
-                            [color]="color"
-                            [checked]="checked"
-                            [disabled]="disabled">
-                        </mat-slide-toggle>
-                    </section>
-                </div>     
-                            
-              
-                
-                              
+                                    <div class="col-sm-2">    
+                                        <label class="">Inat.</label>
+                                        <section class="">
+                                            <mat-slide-toggle    formControlName='inativo'
+                                            class="example-margin"
+                                            [color]="color"
+                                            [checked]="checked"
+                                            [disabled]="disabled">
+                                        </mat-slide-toggle>
+                                    </section>
+                                </div>     
+                                <div class="col-sm-2">    
+                                        <button (click)="sendParamTableProdutos()" type="button" class="pull-right btn btn-outline-primary">Filtrar</button>
+                                </div>
                 </div> <!--row-->
+
+
+
             </form>
     </div><!--card-body-->
 

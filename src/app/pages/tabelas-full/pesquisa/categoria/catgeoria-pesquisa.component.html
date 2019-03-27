@@ -8,7 +8,7 @@
                         [selectable]="selectable"
                         [removable]="removable"
                         (removed)="remove(fruit)">
-                        {{fruit}}
+                        {{fruit.nome}}
                 <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
               </mat-chip>
               <input
@@ -19,7 +19,7 @@
                         [matChipInputFor]="chipList"
                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                         [matChipInputAddOnBlur]="addOnBlur"
-                        (matChipInputTokenEnd)="add($event)">
+                  >
             </mat-chip-list>
             <mat-autocomplete  #auto="matAutocomplete" (optionSelected)="selected($event)">
                   <mat-option  *ngIf="!filteredFruits.length"       [value]="">Não há mais dados.</mat-option>

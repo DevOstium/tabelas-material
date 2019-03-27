@@ -24,10 +24,11 @@ export class TabelaFullPesquisaComponent implements OnInit, OnDestroy {
 
     produtos : Produto[] = [];    
     pesquisa : Subject<string> = new Subject<string>();
+    paramsCategoria : Categoria[] = [];
     
 
     @Output() 
-    paramsPesquisaProduto = new EventEmitter<string>();
+    paramsPesquisaProduto = new EventEmitter<string[]>();
     
     constructor(
                 private  formBuilder       : FormBuilder,
@@ -40,7 +41,7 @@ export class TabelaFullPesquisaComponent implements OnInit, OnDestroy {
         this.categoriaForm = this.formBuilder.group(
                                                       { 
                                                         produto       : [''],
-                                                        categoria     : [''],  
+                                                        categoria     : [''],
                                                         dataInicial   : [''],
                                                         dataFinal     : [''],   
                                                         inativo       : [''],
@@ -81,9 +82,13 @@ export class TabelaFullPesquisaComponent implements OnInit, OnDestroy {
     }
 
     sendParamTableProdutos(  ){
-        console.log("sendParamTableProdutos() ")
+        //console.log("paramsCategoria  ", this.paramsCategoria)
 
-        this.paramsPesquisaProduto.emit( this.categoriaForm.getRawValue());
+        this.categoriaForm.get('categoria').setValue(this.paramsCategoria);
+
+        //const params : string[] = [this.categoriaForm.getRawValue(),this.paramsCategoria ]
+
+        this.paramsPesquisaProduto.emit(this.categoriaForm.getRawValue());
         
     }
 

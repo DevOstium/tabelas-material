@@ -26,4 +26,9 @@ export class ProdutoService {
         return this.http.get<Produto[]>(  `${URL_API}/produtos/paginacao/?orderBy=${orderBy}&direction=${direction}&pagina=${pagina}` )
     }
 
+    findProdutosByFiltros(categorias ){
+        return this.http.get<Produto[]>( `${URL_API}/produtos/paginacao/?categorias=${categorias}` );
+    }
+
+
 }
