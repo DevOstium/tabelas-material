@@ -10,13 +10,17 @@ export class ModalProdutos {
 
     animal : string;
     name   : string;  
+    disableButton = false;
 
     constructor(public dialog: MatDialog){ }          
 
     openDialog(): void {
-        const dialogRef = this.dialog.open(JanelaModalProduto, {
-                                                                  width: '80%',
-                                                                  data: {name: this.name, animal: this.animal}
+        const dialogRef = this.dialog.open(
+                                           JanelaModalProduto, {
+                                                                  width  : '80%',
+                                                                  height : 'auto',
+                                                                  data   : {name: this.name, animal: this.animal}
+                                                                  
                                                                }
                                           );
     

@@ -6,12 +6,13 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from '../../material/mateiral.module';
 import { CommonModule } from '@angular/common';
+import { DebounceClickDirective } from '../directivas/debounce-click.directive';
 
 
 @NgModule({
-    declarations     : [JanelaModalProduto,ModalProdutos],
+    declarations     : [JanelaModalProduto,ModalProdutos, DebounceClickDirective],
+    exports          : [JanelaModalProduto,ModalProdutos, DebounceClickDirective],
     entryComponents  : [JanelaModalProduto,ModalProdutos],
-    exports          : [JanelaModalProduto,ModalProdutos],
     imports : [
         CommonModule,
         MaterialModule,

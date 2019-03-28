@@ -25,7 +25,8 @@ export class JanelaModalProduto implements OnInit {
                                                   {
                                                     nome          : [''],
                                                     estoque       : [''],
-                                                    prazoValidade : ['']
+                                                    prazoValidade : [''],
+                                                    sku           : [''],  
                                                   }
                                                 ) 
   }  
