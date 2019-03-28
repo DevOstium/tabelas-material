@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, HostListener} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material'
 import { DadosModalModel } from '../domain/dados-modal.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -13,11 +13,13 @@ export class JanelaModalProduto implements OnInit {
   produtoForm : FormGroup;
 
   constructor(
-                private formBuilder  : FormBuilder, 
-                private router       : Router,
-                public dialogRef     : MatDialogRef<JanelaModalProduto>,
-                @Inject(MAT_DIALOG_DATA) public data: DadosModalModel
-    ) {}
+                                         private formBuilder  : FormBuilder, 
+                                         private router       : Router,
+                                         public dialogRef     : MatDialogRef<JanelaModalProduto>,
+                @Inject(MAT_DIALOG_DATA) public data          : DadosModalModel
+    ) {
+      dialogRef.disableClose = true;
+    }
 
   ngOnInit(): void {
     
@@ -26,7 +28,8 @@ export class JanelaModalProduto implements OnInit {
                                                     nome          : [''],
                                                     estoque       : [''],
                                                     prazoValidade : [''],
-                                                    sku           : [''],  
+                                                    sku           : [''], 
+                                                    precoVenda    : [''] 
                                                   }
                                                 ) 
   }  

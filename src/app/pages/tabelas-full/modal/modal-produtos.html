@@ -1,16 +1,5 @@
-<ol>
-    <li>
-      <mat-form-field>
-        <input matInput [(ngModel)]="name" placeholder="What's your name?">
-      </mat-form-field>
-    </li>
-    <li>
-        <button mat-raised-button  (click)="openDialog()">Pick one  sem time</button>
-        <button mat-raised-button appDebounceClick [debounceTime]="300" (debounceClick)="openDialog()">Pick one</button>
-    </li>
-    <li *ngIf="animal">
-      You chose: <i>{{animal}}</i>
-    </li>
-    <li>mais</li>
-  </ol>
-  
+  <button type="button"
+          appDebounceClick [debounceTime]="300" 
+          (debounceClick)="openDialog()"
+          class="pull-right btn btn-outline-success">Cadastrar
+  </button>

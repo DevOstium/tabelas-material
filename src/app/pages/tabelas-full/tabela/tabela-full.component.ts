@@ -17,6 +17,9 @@ import { tap, delay, debounceTime } from 'rxjs/operators';
 })
 export class TabelaFullComponent implements OnInit , AfterViewInit {
     
+  color = 'primary';
+  mode = 'indeterminate';
+
   produto           : Produto[] = [];
   displayedColumns  : string[]  = ['select', 'id', 'nome', 'estoque', 'prazoValidade', 'precoVenda', 'inativo' ];
   dataSource        : any;

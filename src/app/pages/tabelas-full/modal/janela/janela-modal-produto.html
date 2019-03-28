@@ -17,11 +17,12 @@
 
         
         <div class="card-body">   
+            <form [formGroup]="produtoForm" class="" (submit)="salvar()">
                 <mat-tab-group dynamicHeight>
             
                     <mat-tab label="First">  
                         <div class="config-tabs mat-elevation-z4">
-                                <form [formGroup]="produtoForm" class="" (submit)="salvar()">
+                              
                                         <div class="row">
                                                 <div class="col-sm-4" >
                                                     <mat-form-field class="full-width-input">
@@ -33,7 +34,7 @@
                                                 </div>     
                                                 <div class="col-sm-4">
                                                     <mat-form-field class="full-width-input">
-                                                        <input formControlName="nome" 
+                                                        <input formControlName="estoque" 
                                                                 matInput 
                                                                 type="number"
                                                                 placeholder="Estoque">  
@@ -61,7 +62,7 @@
                                                     </div>     
 
                                         </div>
-                                    </form>           
+                                           
                            </div>
                     </mat-tab>   
                     <mat-tab  label="Second"> 
@@ -70,9 +71,9 @@
                                         <div class="col-sm-4">
                                             <mat-form-field class="full-width-input">
                                                 <input formControlName="precoVenda" 
-                                                    matInput 
-                                                    type="number"
-                                                    placeholder="Preço de venda R$">  
+                                                       matInput 
+                                                       type="number"
+                                                      placeholder="Preço de venda R$">  
                                             </mat-form-field>
                                         </div>
                                 </div>
@@ -80,7 +81,7 @@
                     </mat-tab>
             
                 </mat-tab-group>
-                
+                </form>   
                 <div class="row">
                     <button mat-raised-button (click)="onNoClick()" color="warn">Sair sem salvar</button>
                 </div>
